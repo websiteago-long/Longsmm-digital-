@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LONG SMM DIGITAL</title>
+    <style>
+        :root {
+            --bg-color: #e0e0e0;
+            --card-bg: #e0e0e0;
+            --text-color: #333333;
+            --shadow-light: #ffffff;
+            --shadow-dark: #bebebe;
+            --accent-color: #4a4ae2;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #1a1a1a;
+            --card-bg: #1a1a1a;
+            --text-color: #ffffff;
+            --shadow-light: #2c2c2c;
+            --shadow-dark: #0a0a0a;
+            --accent-color: #7b7bff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif, system-ui;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* RGB Lighting Border Container */
+        .rgb-border-wrapper {
+            position: relative;
+            padding: 4px;
+            border-radius: 25px;
+            background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+            background-size: 400%;
+            animation: rgbGlow 10s linear infinite;
+            max-width: 420px;
+            width: 100%;
+        }
+
+        @keyframes rgbGlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .app-container {
+            background-color: var(--bg-color);
+            border-radius: 22px;
+            padding: 25px 20px;
+            width: 100%;
+            box-shadow: inset 6px 6px 12px var(--shadow-dark),
+                        inset -6px -6px 12px var(--shadow-light);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Header Section */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        .logo-box {
+            flex: 1;
+            text-align: center;
+            padding: 15px;
+            border-radius: 15px;
+            background: var(--bg-color);
+            box-shadow: 6px 6px 12px var(--shadow-dark),
+                        -6px -6px 12px var(--shadow-light);
+        }
+
+        .logo-box h1 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-color);
+            letter-spacing: 1px;
+        }
+
+        .logo-box p {
+            font-size: 10px;
+            color: #777;
+            margin-top: 4px;
+            font-weight: 600;
+        }
+
+        /* Dark Mode Toggle Button */
+        .theme-toggle {
+            background: var(--bg-color);
+            border: none;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 4px 4px 8px var(--shadow-dark),
+                        -4px -4px 8px var(--shadow-light);
+            font-size: 18px;
+            margin-left: 10px;
+        }
+
+        .theme-toggle:active {
+            box-shadow: inset 3px 3px 6px var(--shadow-dark),
+                        inset -3px -3px 6px var(--shadow-light);
+        }
+
+        /* Sub Text Box */
+        .sub-text-box {
+            text-align: center;
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 12px;
+            background: var(--bg-color);
+            box-shadow: inset 3px 3px 6px var(--shadow-dark),
+                        inset -3px -3px 6px var(--shadow-light);
+            color: #888;
+        }
+
+        /* Services Title */
+        .section-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: -10px;
+            padding-left: 5px;
+        }
+
+        /* Services Grid (3D Buttons) */
+        .services-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .service-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 15px;
+            border-radius: 14px;
+            background: var(--bg-color);
+            border: none;
+            cursor: pointer;
+            box-shadow: 5px 5px 10px var(--shadow-dark),
+                        -5px -5px 10px var(--shadow-light);
+            text-decoration: none;
+            color: var(--text-color);
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .service-btn:active, .service-btn:hover {
+            box-shadow: inset 3px 3px 6px var(--shadow-dark),
+                        inset -3px -3px 6px var(--shadow-light);
+        }
+
+        .service-btn img, .service-btn svg {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+        }
+    </style>
+</head>
+<body data-theme="dark">
+
+    <div class="rgb-border-wrapper">
+        <div class="app-container">
+            <!-- Header with Logo and Dark Mode Toggle -->
+            <div class="header">
+                <div class="logo-box">
+                    <h1>LONG SMM DIGITAL</h1>
+                    <p>WORKING FOR YOU 24/7</p>
+                </div>
+                <button class="theme-toggle" id="themeToggleBtn" onclick="toggleTheme()">🌙</button>
+            </div>
+
+            <!-- Text Bar -->
+            <div class="sub-text-box">
+                Text
+            </div>
+
+            <!-- Section Label -->
+            <div class="section-title">សេវាកម្មសម្រាប់ជ្រើសរើស</div>
+
+            <!-- Services Buttons -->
+            <div class="services-grid">
+                <!-- Facebook -->
+                <a href="#" class="service-btn">
+                    <svg viewBox="0 0 24 24" width="24" height="24"><path fill="#1877F2" d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                    <span>Facebook</span>
+                </a>
+
+                <!-- Tik Tok -->
+                <a href="#" class="service-btn">
+                    <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
+                    <span>Tik Tok</span>
+                </a>
+
+                <!-- Tik Tok kh -->
+                <a href="#" class="service-btn">
+                    <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1 z"/></svg>
+                    <span>Tik Tok kh</span>
+                </a>
+
+                <!-- Telegram -->
+                <a href="#" class="service-btn">
+                    <svg viewBox="0 0 24 24" width="24" height="24"><path fill="#29B6F6" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.161c-.18 1.897-.962 6.502-1.359 8.627-.168.9-.5 1.201-.82 1.23-.697.064-1.226-.461-1.901-.903-1.056-.693-1.653-1.124-2.678-1.8-1.185-.781-.417-1.21.258-1.911.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635.099-.002.321.023.465.141.119.098.152.228.163.33.016.116.033.378.016.584z"/></svg>
+                    <span>Telegram</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const btn = document.getElementById('themeToggleBtn');
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.setAttribute('data-theme', 'light');
+                btn.textContent = '☀️';
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                btn.textContent = '🌙';
+            }
+        }
+    </script>
+</body>
+</html>
