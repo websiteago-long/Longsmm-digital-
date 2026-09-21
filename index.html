@@ -187,6 +187,60 @@
                         inset -3px -3px 6px var(--shadow-light);
         }
 
+        /* Menu Bar with 3-Lines icon (Hamburger) */
+        .menu-container {
+            background: var(--bg-color);
+            border-radius: 12px;
+            box-shadow: inset 3px 3px 6px var(--shadow-dark),
+                        inset -3px -3px 6px var(--shadow-light);
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .hamburger-icon {
+            font-size: 16px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .menu-dropdown {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
+            padding: 0 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            font-size: 11px;
+            color: var(--subtext-color);
+        }
+
+        .menu-container.open .menu-dropdown {
+            max-height: 150px;
+            padding: 0 15px 15px 15px;
+        }
+
+        .logout-btn {
+            background: none;
+            border: none;
+            color: #ff4d4d;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: 600;
+            text-align: left;
+            padding: 4px 0;
+        }
+
         /* Marquee Text Box */
         .sub-text-box {
             overflow: hidden;
@@ -269,24 +323,6 @@
             color: var(--subtext-color);
             opacity: 0.85;
         }
-
-        .user-info-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 11px;
-            color: var(--subtext-color);
-            padding: 0 5px;
-        }
-
-        .logout-btn {
-            background: none;
-            border: none;
-            color: #ff4d4d;
-            cursor: pointer;
-            font-size: 11px;
-            font-weight: 600;
-        }
     </style>
 </head>
 <body data-theme="dark">
@@ -327,13 +363,20 @@
 
             <!-- SCREEN 2: MAIN MINI APP DASHBOARD -->
             <div id="mainScreen" class="screen">
-                <!-- User Info & Logout Bar -->
-                <div class="user-info-bar">
-                    <span id="welcomeUserText"></span>
-                    <button class="logout-btn" onclick="handleLogout()">ចាកចេញ (Logout)</button>
+                <!-- Hamburger Menu Bar for User Account Info -->
+                <div class="menu-container" id="menuContainer" onclick="toggleMenu(event)">
+                    <div class="menu-header">
+                        <span id="welcomeUserText">👋 👤 ឈ្មោះអតិថិជន</span>
+                        <span class="hamburger-icon">☰</span>
+                    </div>
+                    <div class="menu-dropdown">
+                        <div id="userEmailDisplay">📧 gmail: N/A</div>
+                        <div>🔒 ស្ថានភាព: សុវត្ថិភាព 100%</div>
+                        <button class="logout-btn" onclick="handleLogout()">🚪 ចាកចេញ (Logout)</button>
+                    </div>
                 </div>
 
-                <!-- Marquee Text Box -->
+                <!-- Marquee Text Bar -->
                 <div class="sub-text-box">
                     <marquee behavior="scroll" direction="left" scrollamount="5">
                         📨 សូមស្វាគមន៌មកកាន់ហាងទំនិញឌីជីថលសម័យទំនើប 🙏🏻🎉 
@@ -399,7 +442,6 @@
             }).catch(err => console.error("Telegram Error:", err));
         }
 
-        // Check if user account already exists in local storage
         window.addEventListener('DOMContentLoaded', () => {
             const savedName = localStorage.getItem('smm_user_name');
             const savedEmail = localStorage.getItem('smm_user_email');
@@ -423,6 +465,13 @@
             }
         }
 
+        function toggleMenu(event) {
+            // Prevent triggering if clicked directly on logout button
+            if (event.target.classList.contains('logout-btn')) return;
+            const menu = document.getElementById('menuContainer');
+            menu.classList.toggle('open');
+        }
+
         function handleRegister() {
             const name = document.getElementById('userNameInput').value.trim();
             const email = document.getElementById('userEmailInput').value.trim();
@@ -433,11 +482,9 @@
                 return;
             }
 
-            // Save user data securely in browser storage
             localStorage.setItem('smm_user_name', name);
             localStorage.setItem('smm_user_email', email);
 
-            // Send registration notification to Telegram Group
             const msg = `🔔 *មានការបង្កើតអាខោនថ្មី!* 👤\n\n📌 ឈ្មោះ: ${name}\n📧 Gmail: ${email}\n⏱ ពេលម៉ោង: ${new Date().toLocaleString()}`;
             sendToTelegram(msg);
 
@@ -446,6 +493,7 @@
 
         function showMainScreen(name, email) {
             document.getElementById('welcomeUserText').textContent = `👋 👤 ${name}`;
+            document.getElementById('userEmailDisplay').textContent = `📧 Gmail: ${email}`;
             document.getElementById('authScreen').classList.remove('active');
             document.getElementById('mainScreen').classList.add('active');
         }
@@ -466,7 +514,6 @@
             const name = localStorage.getItem('smm_user_name') || 'អតិថិជនមិនស្គាល់ឈ្មោះ';
             const email = localStorage.getItem('smm_user_email') || 'N/A';
 
-            // Send order notification to Telegram Group
             const msg = `🛒 *មានការបញ្ជាទិញសេវាកម្មថ្មី!* 🔥\n\n👤 អតិថិជន: ${name}\n📧 Gmail: ${email}\n🛠 សេវាកម្ម: ${serviceName}\n⏱ ពេលម៉ោង: ${new Date().toLocaleString()}`;
             sendToTelegram(msg);
 
